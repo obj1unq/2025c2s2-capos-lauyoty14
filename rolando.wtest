@@ -1,0 +1,48 @@
+import capos.* 
+
+describe "test de ronaldo parte 1" {
+  test "ejercicio 1.1" {
+    rolando.encontrarArtefacto(espadaDelDestino)
+    rolando.encontrarArtefacto(libroDeHechizos)
+    assert.throwsException({ rolando.encontrarArtefacto(collarDivino) })
+    assert.equals([espadaDelDestino, libroDeHechizos], rolando.mochila())
+  }
+
+  test "ejercicio 1.2" {
+    rolando.encontrarArtefacto(espadaDelDestino)
+    rolando.encontrarArtefacto(libroDeHechizos)
+    rolando.llegarAlCastilloYGuardar()
+    rolando.encontrarArtefacto(collarDivino)
+    rolando.llegarAlCastilloYGuardar()
+    assert.equals(castilloDePiedra.almacenDeArtefactos(), [espadaDelDestino, libroDeHechizos, collarDivino])
+  }
+
+  test "ejercicio 1.3" {
+    rolando.encontrarArtefacto(collarDivino)
+    rolando.encontrarArtefacto(espadaDelDestino)
+    rolando.llegarAlCastilloYGuardar()
+    rolando.encontrarArtefacto(armaduraDeAceroValyrio)
+    assert.equals(rolando.todosLosArtefactos(), [collarDivino, espadaDelDestino, armaduraDeAceroValyrio])
+    assert.notThat(rolando.tieneElArtefacto(libroDeHechizos))
+  }
+
+  test "ejercicio 1.4" {
+    rolando.encontrarArtefacto(espadaDelDestino)
+    rolando.encontrarArtefacto(libroDeHechizos)
+    assert.throwsException({ rolando.encontrarArtefacto(collarDivino) })
+    rolando.llegarAlCastilloYGuardar()
+    rolando.encontrarArtefacto(armaduraDeAceroValyrio)
+    rolando.encontrarArtefacto(collarDivino)
+    assert.equals(rolando.historialDeArtefactos(), [espadaDelDestino, libroDeHechizos, collarDivino, armaduraDeAceroValyrio, collarDivino])
+  }
+}
+
+describe "test rolando parte 2" {
+  test "ejercicio 2.1" {
+    rolando.tamañoDeMochila(3)
+    rolando.encontrarArtefacto(espadaDelDestino)
+    rolando.encontrarArtefacto(armaduraDeAceroValyrio)
+    rolando.encontrarArtefacto(collarDivino)
+    
+  }
+}
