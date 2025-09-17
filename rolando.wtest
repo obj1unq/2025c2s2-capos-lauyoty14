@@ -2,6 +2,7 @@ import capos.*
 
 describe "test de ronaldo parte 1" {
   test "ejercicio 1.1" {
+    rolando.mochila([])
     rolando.encontrarArtefacto(espadaDelDestino)
     rolando.encontrarArtefacto(libroDeHechizos)
     assert.throwsException({ rolando.encontrarArtefacto(collarDivino) })
@@ -9,6 +10,7 @@ describe "test de ronaldo parte 1" {
   }
 
   test "ejercicio 1.2" {
+    rolando.mochila([])
     rolando.encontrarArtefacto(espadaDelDestino)
     rolando.encontrarArtefacto(libroDeHechizos)
     rolando.llegarAlCastilloYGuardar()
@@ -18,6 +20,7 @@ describe "test de ronaldo parte 1" {
   }
 
   test "ejercicio 1.3" {
+    rolando.mochila([])
     rolando.encontrarArtefacto(collarDivino)
     rolando.encontrarArtefacto(espadaDelDestino)
     rolando.llegarAlCastilloYGuardar()
@@ -27,6 +30,7 @@ describe "test de ronaldo parte 1" {
   }
 
   test "ejercicio 1.4" {
+    rolando.mochila([])
     rolando.encontrarArtefacto(espadaDelDestino)
     rolando.encontrarArtefacto(libroDeHechizos)
     assert.throwsException({ rolando.encontrarArtefacto(collarDivino) })
@@ -38,11 +42,58 @@ describe "test de ronaldo parte 1" {
 }
 
 describe "test rolando parte 2" {
-  test "ejercicio 2.1" {
+    method initialize(){
     rolando.tamañoDeMochila(3)
     rolando.encontrarArtefacto(espadaDelDestino)
     rolando.encontrarArtefacto(armaduraDeAceroValyrio)
     rolando.encontrarArtefacto(collarDivino)
-    
+  }
+  test "ejercicio 2.1" {
+    assert.equals(5, espadaDelDestino.poderArtefacto(rolando))
+    assert.equals(6, armaduraDeAceroValyrio.poderArtefacto(rolando))
+    assert.equals(3, collarDivino.poderArtefacto(rolando))
+    rolando.batallar()
+    assert.equals(6, rolando.poderBase())
+    assert.equals(3, espadaDelDestino.poderArtefacto(rolando))
+    assert.equals(6, armaduraDeAceroValyrio.poderArtefacto(rolando))
+    assert.equals(3, collarDivino.poderArtefacto(rolando))
+    rolando.batallar()
+    assert.equals(7, rolando.poderBase())
+    assert.equals(3.5, espadaDelDestino.poderArtefacto(rolando))
+    assert.equals(6, armaduraDeAceroValyrio.poderArtefacto(rolando))
+    assert.equals(5, collarDivino.poderArtefacto(rolando))
+    rolando.batallar()
+    assert.equals(8, rolando.poderBase())
+    assert.equals(4, espadaDelDestino.poderArtefacto(rolando))
+    assert.equals(6, armaduraDeAceroValyrio.poderArtefacto(rolando))
+    assert.equals(6, collarDivino.poderArtefacto(rolando))   
+  }
+  test "rolando parte 2: batalla" {
+    assert.equals(19, rolando.poderDePelea())
+  }
+  test "rolando parte2 : 2.2" {
+    rolando.llegarAlCastilloYGuardar()
+    rolando.encontrarArtefacto(libroDeHechizos)
+    libroDeHechizos.añadirHechizo(hechizoBendicion)
+    libroDeHechizos.añadirHechizo(hechizoInvisibilidad)
+    libroDeHechizos.añadirHechizo(hechizoInvocacion)
+    assert.equals(4, libroDeHechizos.poderArtefacto(rolando))
+    rolando.batallar()
+    assert.equals(6, libroDeHechizos.poderArtefacto(rolando))
+    rolando.batallar()
+    assert.equals(7, libroDeHechizos.poderArtefacto(rolando))
+    rolando.batallar()
+    assert.equals(0, libroDeHechizos.poderArtefacto(rolando))
+  }
+
+  test "rolando parte2 : 2.3" {
+    assert.equals(rolando.enemigosQuePuedeVencer().asSet(), #{archibaldo, astra})
+    assert.equals(rolando.moradasConquistables().asSet(), #{palacioDeMarmol, torreDeMarfil})   
+  }
+
+  test "ronaldo parte2 : 2.5" {
+    rolando.poderBase(15)
+    assert.that(rolando.tieneArtefactoFatal(astra))
+    assert.that(rolando.tieneArtefactoFatal(caterina))
   }
 }
